@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   User as UserIcon,
   Mail,
@@ -11,7 +11,7 @@ import {
   Sparkles,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
-import { authApi } from '../../services/api';
+import { authApi, rolesApi } from '../../services/api';
 import { useToast } from '../../context/ToastContext';
 
 export const ProfilePage: React.FC = () => {
@@ -22,6 +22,7 @@ export const ProfilePage: React.FC = () => {
   const [name, setName] = useState(user?.name || '');
   const [targetRole, setTargetRole] = useState(user?.targetRole || 'Software Engineer');
   const [profileSaving, setProfileSaving] = useState(false);
+  const [supportedRoles, setSupportedRoles] = useState<string[]>([]);
 
   // Password Change State
   const [currentPassword, setCurrentPassword] = useState('');
@@ -29,16 +30,16 @@ export const ProfilePage: React.FC = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordSaving, setPasswordSaving] = useState(false);
 
-  const supportedRoles = [
-    'Java Developer',
-    'Frontend Developer',
-    'Backend Developer',
-    'Full Stack Developer',
-    'Python Developer',
-    'Data Analyst',
-    'Software Engineer',
-    'HR / Behavioral',
-  ];
+  useEffect(() => {
+    rolesApi
+      .getAll(true)
+      .then((data) => {
+        if (data && data.length > 0) {
+          setSupportedRoles(data.map((r) => r.name));
+        }
+      })
+      .catch((err) => console.error('Failed to load roles for profile', err));
+  }, []);
 
   const handleUpdateProfile = async (e: React.FormEvent) => {
     e.preventDefault();

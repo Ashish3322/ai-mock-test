@@ -8,6 +8,7 @@ import {
   BarChart3,
   Cpu,
   Users,
+  Smartphone,
   Sparkles,
   HelpCircle,
   LucideProps,
@@ -53,6 +54,10 @@ export const RoleIcon: React.FC<RoleIconProps> = ({ name, ...props }) => {
     case 'hrbehavioral':
     case 'behavioral':
       return <Users {...props} />;
+    case 'smartphone':
+    case 'flutter':
+    case 'flutterdeveloper':
+      return <Smartphone {...props} />;
     default:
       return <Sparkles {...props} />;
   }

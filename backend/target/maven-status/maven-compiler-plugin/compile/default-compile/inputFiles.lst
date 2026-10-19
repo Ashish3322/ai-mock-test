@@ -7,7 +7,9 @@ C:\Users\ashis\scratch\ai-interview\backend\src\main\java\com\aiinterview\prep\c
 C:\Users\ashis\scratch\ai-interview\backend\src\main\java\com\aiinterview\prep\controller\AdminController.java
 C:\Users\ashis\scratch\ai-interview\backend\src\main\java\com\aiinterview\prep\controller\AuthController.java
 C:\Users\ashis\scratch\ai-interview\backend\src\main\java\com\aiinterview\prep\controller\DashboardController.java
+C:\Users\ashis\scratch\ai-interview\backend\src\main\java\com\aiinterview\prep\controller\HomeController.java
 C:\Users\ashis\scratch\ai-interview\backend\src\main\java\com\aiinterview\prep\controller\InterviewController.java
+C:\Users\ashis\scratch\ai-interview\backend\src\main\java\com\aiinterview\prep\controller\McqController.java
 C:\Users\ashis\scratch\ai-interview\backend\src\main\java\com\aiinterview\prep\controller\QuestionController.java
 C:\Users\ashis\scratch\ai-interview\backend\src\main\java\com\aiinterview\prep\controller\RoleController.java
 C:\Users\ashis\scratch\ai-interview\backend\src\main\java\com\aiinterview\prep\dto\AdminStatsDto.java
@@ -26,6 +28,7 @@ C:\Users\ashis\scratch\ai-interview\backend\src\main\java\com\aiinterview\prep\d
 C:\Users\ashis\scratch\ai-interview\backend\src\main\java\com\aiinterview\prep\entity\Feedback.java
 C:\Users\ashis\scratch\ai-interview\backend\src\main\java\com\aiinterview\prep\entity\InterviewResponse.java
 C:\Users\ashis\scratch\ai-interview\backend\src\main\java\com\aiinterview\prep\entity\InterviewSession.java
+C:\Users\ashis\scratch\ai-interview\backend\src\main\java\com\aiinterview\prep\entity\McqQuestion.java
 C:\Users\ashis\scratch\ai-interview\backend\src\main\java\com\aiinterview\prep\entity\Question.java
 C:\Users\ashis\scratch\ai-interview\backend\src\main\java\com\aiinterview\prep\entity\Role.java
 C:\Users\ashis\scratch\ai-interview\backend\src\main\java\com\aiinterview\prep\entity\User.java
@@ -35,6 +38,7 @@ C:\Users\ashis\scratch\ai-interview\backend\src\main\java\com\aiinterview\prep\e
 C:\Users\ashis\scratch\ai-interview\backend\src\main\java\com\aiinterview\prep\repository\FeedbackRepository.java
 C:\Users\ashis\scratch\ai-interview\backend\src\main\java\com\aiinterview\prep\repository\InterviewResponseRepository.java
 C:\Users\ashis\scratch\ai-interview\backend\src\main\java\com\aiinterview\prep\repository\InterviewSessionRepository.java
+C:\Users\ashis\scratch\ai-interview\backend\src\main\java\com\aiinterview\prep\repository\McqQuestionRepository.java
 C:\Users\ashis\scratch\ai-interview\backend\src\main\java\com\aiinterview\prep\repository\QuestionRepository.java
 C:\Users\ashis\scratch\ai-interview\backend\src\main\java\com\aiinterview\prep\repository\RoleRepository.java
 C:\Users\ashis\scratch\ai-interview\backend\src\main\java\com\aiinterview\prep\repository\UserRepository.java

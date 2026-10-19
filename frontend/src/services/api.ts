@@ -7,6 +7,8 @@ import {
   Question,
   Role,
   User,
+  McqQuestion,
+  McqTrackInfo,
 } from '../types';
 
 const API_BASE_URL = '/api';
@@ -196,6 +198,82 @@ export const adminApi = {
   },
   getAllInterviews: async (): Promise<InterviewSession[]> => {
     const response = await api.get<InterviewSession[]>('/admin/interviews');
+    return response.data;
+  },
+  getAdminMcqs: async (): Promise<McqQuestion[]> => {
+    const response = await api.get<McqQuestion[]>('/admin/mcqs');
+    return response.data;
+  },
+  createMcq: async (mcqData: {
+    track: string;
+    category: string;
+    difficulty: string;
+    question: string;
+    codeSnippet?: string;
+    optionA: string;
+    optionB: string;
+    optionC: string;
+    optionD: string;
+    correctAnswerIndex: number;
+    explanation: string;
+  }): Promise<McqQuestion> => {
+    const response = await api.post<McqQuestion>('/admin/mcqs', mcqData);
+    return response.data;
+  },
+  updateMcq: async (
+    id: number,
+    mcqData: {
+      track: string;
+      category: string;
+      difficulty: string;
+      question: string;
+      codeSnippet?: string;
+      optionA: string;
+      optionB: string;
+      optionC: string;
+      optionD: string;
+      correctAnswerIndex: number;
+      explanation: string;
+    }
+  ): Promise<McqQuestion> => {
+    const response = await api.put<McqQuestion>(`/admin/mcqs/${id}`, mcqData);
+    return response.data;
+  },
+  deleteMcq: async (id: number): Promise<void> => {
+    await api.delete(`/admin/mcqs/${id}`);
+  },
+  toggleMcq: async (id: number): Promise<McqQuestion> => {
+    const response = await api.patch<McqQuestion>(`/admin/mcqs/${id}/toggle`);
+    return response.data;
+  },
+};
+
+// MCQ Service
+export interface McqVerifyResponse {
+  correct: boolean;
+  correctAnswerIndex: number;
+  explanation: string;
+}
+
+export const mcqApi = {
+  getAll: async (track?: string, difficulty?: string): Promise<McqQuestion[]> => {
+    const params = new URLSearchParams();
+    if (track && track !== 'all') params.append('track', track);
+    if (difficulty && difficulty !== 'all') params.append('difficulty', difficulty);
+    const query = params.toString() ? `?${params.toString()}` : '';
+    const response = await api.get<McqQuestion[]>(`/mcqs${query}`);
+    return response.data;
+  },
+  getTracks: async (): Promise<McqTrackInfo[]> => {
+    const response = await api.get<McqTrackInfo[]>('/mcqs/tracks');
+    return response.data;
+  },
+  getById: async (id: number): Promise<McqQuestion> => {
+    const response = await api.get<McqQuestion>(`/mcqs/${id}`);
+    return response.data;
+  },
+  verifyAnswer: async (questionId: number, selectedIndex: number): Promise<McqVerifyResponse> => {
+    const response = await api.post<McqVerifyResponse>('/mcqs/verify', { questionId, selectedIndex });
     return response.data;
   },
 };

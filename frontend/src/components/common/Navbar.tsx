@@ -10,6 +10,8 @@ export const Navbar: React.FC = () => {
 
   const navLinks = [
     { label: 'Home', path: '/' },
+    { label: 'Interview Q&A', path: '/questions' },
+    { label: 'MCQ Practice', path: '/mcq' },
     { label: 'Features', path: '/features' },
     { label: 'About', path: '/about' },
   ];
@@ -29,7 +31,7 @@ export const Navbar: React.FC = () => {
               <span className="text-xl font-bold tracking-tight bg-gradient-to-r from-white via-slate-100 to-slate-400 bg-clip-text text-transparent">
                 AI Interview Prep
               </span>
-              <span className="text-[10px] uppercase font-semibold tracking-wider text-indigo-400 -mt-1">
+              <span className="text-xs uppercase font-semibold tracking-wider text-indigo-400 mt-0.5">
                 Placement Simulator
               </span>
             </div>

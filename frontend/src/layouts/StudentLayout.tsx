@@ -13,6 +13,8 @@ import {
   Sparkles,
   ChevronRight,
   Target,
+  ListChecks,
+  BookOpen,
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
@@ -33,6 +35,8 @@ export const StudentLayout: React.FC = () => {
   const navItems = [
     { label: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
     { label: 'Start Interview', path: '/start-interview', icon: PlayCircle },
+    { label: 'Interview Q&A', path: '/questions', icon: BookOpen },
+    { label: 'MCQ Practice', path: '/mcq', icon: ListChecks },
     { label: 'Interview History', path: '/history', icon: History },
     { label: 'Progress', path: '/progress', icon: TrendingUp },
     { label: 'Profile', path: '/profile', icon: UserIcon },
@@ -62,7 +66,7 @@ export const StudentLayout: React.FC = () => {
             </div>
             <div className="flex flex-col">
               <span className="font-bold text-base tracking-tight text-white">AI Interview</span>
-              <span className="text-[10px] uppercase font-semibold text-indigo-400">Prep Portal</span>
+              <span className="text-xs uppercase font-semibold text-indigo-400 mt-0.5">Prep Portal</span>
             </div>
           </Link>
           <button
@@ -75,7 +79,7 @@ export const StudentLayout: React.FC = () => {
 
         {/* Navigation Items */}
         <div className="flex-1 py-6 px-4 space-y-1.5 overflow-y-auto">
-          <div className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 px-3 mb-2">
+          <div className="text-xs font-semibold uppercase tracking-wider text-slate-400 px-3 mb-2">
             Practice & Insights
           </div>
           {navItems.map((item) => {

@@ -13,6 +13,7 @@ import {
   AlertTriangle,
   FileText,
   ShieldCheck,
+  ListChecks,
 } from 'lucide-react';
 import { dashboardApi } from '../../services/api';
 import { DashboardStats } from '../../types';
@@ -99,13 +100,22 @@ export const DashboardPage: React.FC = () => {
           </p>
         </div>
 
-        <Link
-          to="/start-interview"
-          className="inline-flex items-center justify-center space-x-2.5 px-6 py-3.5 rounded-xl bg-gradient-to-r from-indigo-500 to-cyan-500 text-white font-semibold text-sm shadow-lg shadow-indigo-500/25 hover:from-indigo-400 hover:to-cyan-400 transition-all hover:scale-105 active:scale-95 shrink-0"
-        >
-          <PlayCircle className="w-5 h-5" />
-          <span>Start New Interview</span>
-        </Link>
+        <div className="flex flex-wrap items-center gap-3 shrink-0">
+          <Link
+            to="/start-interview"
+            className="inline-flex items-center justify-center space-x-2.5 px-5 py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-cyan-500 text-white font-semibold text-sm shadow-lg shadow-indigo-500/25 hover:from-indigo-400 hover:to-cyan-400 transition-all hover:scale-105 active:scale-95"
+          >
+            <PlayCircle className="w-5 h-5" />
+            <span>Start Interview</span>
+          </Link>
+          <Link
+            to="/mcq"
+            className="inline-flex items-center justify-center space-x-2 px-4 py-3 rounded-xl bg-slate-900/90 border border-indigo-500/40 text-indigo-300 hover:text-white hover:bg-slate-800 text-sm font-semibold transition-all shadow-md"
+          >
+            <ListChecks className="w-4 h-4 text-indigo-400" />
+            <span>Practice MCQs</span>
+          </Link>
+        </div>
       </div>
 
       {/* 4 Stats Cards */}

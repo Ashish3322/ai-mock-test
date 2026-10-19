@@ -16,6 +16,8 @@ import {
   Terminal,
   PlayCircle,
   HelpCircle,
+  ListChecks,
+  BookOpen,
 } from 'lucide-react';
 import { rolesApi } from '../../services/api';
 import { Role } from '../../types';
@@ -141,20 +143,29 @@ export const HomePage: React.FC = () => {
                 Prepare for your next technical interview with realistic role-based interviews and instant AI feedback. Master technical depth, communication clarity, and situational judgment.
               </p>
 
-              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+              <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center lg:justify-start gap-3.5">
+                <Link
+                  to="/questions"
+                  className="w-full sm:w-auto flex items-center justify-center space-x-2 px-6 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm shadow-xl shadow-indigo-600/25 transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+                >
+                  <BookOpen className="w-4 h-4" />
+                  <span>Interview Q&A (Answers)</span>
+                </Link>
+
+                <Link
+                  to="/mcq"
+                  className="w-full sm:w-auto flex items-center justify-center space-x-2 px-6 py-3.5 rounded-xl bg-slate-900 border border-slate-700 hover:border-indigo-500 hover:bg-slate-800 text-slate-100 hover:text-white font-semibold text-sm transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+                >
+                  <ListChecks className="w-4 h-4 text-indigo-400" />
+                  <span>MCQ Practice Arena</span>
+                </Link>
+
                 <Link
                   to={isAuthenticated ? '/start-interview' : '/login'}
-                  className="w-full sm:w-auto flex items-center justify-center space-x-2.5 px-8 py-3.5 rounded-xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-cyan-500 text-white font-semibold text-base shadow-xl shadow-indigo-500/25 hover:from-indigo-500 hover:to-cyan-400 transition-all hover:scale-[1.02] active:scale-[0.98]"
+                  className="w-full sm:w-auto flex items-center justify-center space-x-2 px-6 py-3.5 rounded-xl bg-slate-950/80 border border-slate-800 hover:bg-slate-900 text-slate-300 hover:text-white font-semibold text-sm transition-colors"
                 >
-                  <PlayCircle className="w-5 h-5" />
-                  <span>Start Interview</span>
-                </Link>
-                <Link
-                  to="/features"
-                  className="w-full sm:w-auto flex items-center justify-center space-x-2 px-7 py-3.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-200 font-semibold text-base hover:bg-slate-800/80 hover:text-white transition-colors"
-                >
-                  <span>Explore Features</span>
-                  <ChevronRight className="w-4 h-4 text-slate-400" />
+                  <PlayCircle className="w-4 h-4 text-cyan-400" />
+                  <span>Mock Simulator</span>
                 </Link>
               </div>
 
@@ -259,6 +270,119 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
+      {/* Two Specialized Preparation Sections Showcase */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center space-y-3 mb-10">
+          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold uppercase tracking-wider">
+            <span>Two Specialized Preparation Tracks</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight font-heading">
+            Choose Your Preparation Mode
+          </h2>
+          <p className="text-sm sm:text-base text-slate-400 max-w-2xl mx-auto">
+            Whether you want in-depth conceptual study with long-form model answers or rapid-fire MCQ practice, both sections are fully equipped and managed by administrators.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Card 1: Interview Questions & Answers */}
+          <div className="relative p-7 sm:p-8 rounded-3xl bg-gradient-to-b from-indigo-950/40 via-slate-900 to-slate-900 border border-indigo-500/30 hover:border-indigo-500/60 shadow-xl flex flex-col justify-between space-y-6 transition-all group">
+            <div className="space-y-4">
+              <div className="w-12 h-12 rounded-2xl bg-indigo-600/20 border border-indigo-500/30 flex items-center justify-center text-indigo-400 group-hover:scale-105 transition-transform">
+                <BookOpen className="w-6 h-6" />
+              </div>
+              <span className="text-xs font-bold uppercase tracking-wider text-indigo-400">
+                Section 1 • Role-Based Interview Q&A
+              </span>
+              <h3 className="text-2xl font-bold text-white font-heading">
+                Detailed Technical Questions & Long Answers
+              </h3>
+              <p className="text-sm text-slate-300 leading-relaxed">
+                Explore dedicated question banks organized strictly by job role. Study multi-paragraph model answers, key expected keywords, and conceptual architectural explanations for Frontend, Backend, Flutter, Java, Python, and Data Analyst roles.
+              </p>
+              <div className="flex flex-wrap gap-2 pt-2">
+                {[
+                  'Frontend Developer',
+                  'Backend Developer',
+                  'Full Stack Developer',
+                  'Flutter Developer',
+                  'Java Developer',
+                  'Python Developer',
+                  'Data Analyst',
+                  'HR / Behavioral',
+                ].map((r) => (
+                  <span
+                    key={r}
+                    className="px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 text-xs font-medium border border-slate-700/80"
+                  >
+                    {r}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="pt-4 border-t border-slate-800 flex items-center justify-between">
+              <Link
+                to="/questions"
+                className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm shadow-md shadow-indigo-600/20 transition-all cursor-pointer"
+              >
+                <span>Browse Questions & Answers</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+              <span className="text-xs text-slate-400">Long-form answers</span>
+            </div>
+          </div>
+
+          {/* Card 2: MCQs Practice Arena */}
+          <div className="relative p-7 sm:p-8 rounded-3xl bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 border border-slate-800 hover:border-indigo-500/40 shadow-xl flex flex-col justify-between space-y-6 transition-all group">
+            <div className="space-y-4">
+              <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 group-hover:scale-105 transition-transform">
+                <ListChecks className="w-6 h-6" />
+              </div>
+              <span className="text-xs font-bold uppercase tracking-wider text-indigo-400">
+                Section 2 • MCQ Practice Arena
+              </span>
+              <h3 className="text-2xl font-bold text-white font-heading">
+                Multiple-Choice Questions with Explanations
+              </h3>
+              <p className="text-sm text-slate-300 leading-relaxed">
+                Practice high-yield technical and placement MCQs with 4 options, instant correct answer validation, technical explanations, and timed quiz modes across 8 core engineering tracks.
+              </p>
+              <div className="flex flex-wrap gap-2 pt-2">
+                {[
+                  'Java & OOPs',
+                  'React & Frontend',
+                  'Python Internals',
+                  'Database & SQL',
+                  'Backend Systems',
+                  'Campus Aptitude',
+                  'C++ Low-Level',
+                  'Cloud & DevOps',
+                ].map((t) => (
+                  <span
+                    key={t}
+                    className="px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 text-xs font-medium border border-slate-700/80"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="pt-4 border-t border-slate-800 flex items-center justify-between">
+              <Link
+                to="/mcq"
+                className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold text-sm border border-slate-700 transition-all cursor-pointer"
+              >
+                <span>Enter MCQ Practice Arena</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+              <span className="text-xs text-slate-400">Practice & Timed Modes</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Features Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center space-y-4 mb-16">
@@ -285,15 +409,119 @@ export const HomePage: React.FC = () => {
                   <div className="w-12 h-12 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 group-hover:bg-indigo-500 group-hover:text-white transition-all">
                     <Icon className="w-6 h-6" />
                   </div>
-                  <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-400 px-2.5 py-1 rounded-md bg-slate-800/80">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-slate-300 px-2.5 py-1 rounded-md bg-slate-800/80 border border-slate-700/50">
                     {feat.tag}
                   </span>
                 </div>
                 <h3 className="text-lg font-bold text-white mb-2">{feat.title}</h3>
-                <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">{feat.description}</p>
+                <p className="text-sm text-slate-400 leading-relaxed">{feat.description}</p>
               </div>
             );
           })}
+        </div>
+      </section>
+
+      {/* MCQ Practice Showcase Section */}
+      <section className="relative overflow-hidden py-16 sm:py-20 border-y border-slate-800/80 bg-gradient-to-b from-slate-900/60 via-indigo-950/20 to-slate-900/60">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            {/* Left Column: Description & Track Pills */}
+            <div className="lg:col-span-6 space-y-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold uppercase tracking-wider">
+                <ListChecks className="w-4 h-4" /> Dedicated MCQ Arena
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
+                Master Technical & Placement MCQs with Real-Time Explanations
+              </h2>
+              <p className="text-base text-slate-300 leading-relaxed">
+                Test your conceptual depth before your mock interview. Practice high-frequency multiple-choice questions covering Java internals, React hooks, Python GIL, SQL indexing, and aptitude.
+              </p>
+
+              {/* Track tags */}
+              <div className="flex flex-wrap gap-2 pt-2">
+                {[
+                  '☕ Core Java & OOPs',
+                  '⚛️ React 19 & JS',
+                  '🐍 Python Internals',
+                  '🗄️ SQL & Indexing',
+                  '🚀 System Design & APIs',
+                  '🧠 Placement Aptitude',
+                ].map((trackName, i) => (
+                  <span
+                    key={i}
+                    className="px-3 py-1.5 rounded-lg bg-slate-900/80 border border-slate-700/70 text-xs font-medium text-slate-200"
+                  >
+                    {trackName}
+                  </span>
+                ))}
+              </div>
+
+              <div className="pt-4 flex flex-col sm:flex-row items-center gap-4">
+                <Link
+                  to="/mcq"
+                  className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm shadow-lg shadow-indigo-600/30 transition-all hover:scale-[1.02]"
+                >
+                  <ListChecks className="w-4 h-4" />
+                  <span>Open MCQ Practice Arena</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+                <div className="text-xs text-slate-400 flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                  <span>Instant Answers & Explanations</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column: Live Interactive Card Mockup */}
+            <div className="lg:col-span-6">
+              <div className="p-6 sm:p-7 rounded-2xl bg-slate-900/90 border border-indigo-500/30 shadow-2xl shadow-indigo-950/40 relative">
+                <div className="flex items-center justify-between pb-3 mb-4 border-b border-slate-800 text-xs">
+                  <span className="px-2.5 py-0.5 rounded bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 font-semibold uppercase">
+                    Sample Question • Java OOP
+                  </span>
+                  <span className="text-emerald-400 font-medium">Practice Mode</span>
+                </div>
+
+                <h3 className="text-base sm:text-lg font-bold text-white mb-4">
+                  Which principle is violated when a subclass cannot substitute for its base class without breaking correctness?
+                </h3>
+
+                <div className="space-y-2.5 text-sm">
+                  {[
+                    { label: 'A', text: 'Single Responsibility Principle (SRP)', correct: false },
+                    { label: 'B', text: 'Open/Closed Principle (OCP)', correct: false },
+                    { label: 'C', text: 'Liskov Substitution Principle (LSP)', correct: true, selected: true },
+                    { label: 'D', text: 'Dependency Inversion Principle (DIP)', correct: false },
+                  ].map((opt, i) => (
+                    <div
+                      key={i}
+                      className={`p-3 rounded-xl border flex items-center gap-3 transition-colors ${
+                        opt.correct
+                          ? 'border-emerald-500/50 bg-emerald-950/30 text-emerald-200'
+                          : 'border-slate-800 bg-slate-950/50 text-slate-400'
+                      }`}
+                    >
+                      <span
+                        className={`w-6 h-6 rounded-md flex items-center justify-center text-xs font-bold ${
+                          opt.correct ? 'bg-emerald-500 text-white' : 'bg-slate-800 text-slate-400'
+                        }`}
+                      >
+                        {opt.correct ? '✓' : opt.label}
+                      </span>
+                      <span className="text-xs sm:text-sm font-medium">{opt.text}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-4 p-3 rounded-lg bg-emerald-950/40 border border-emerald-500/20 text-xs text-emerald-300">
+                  <p className="font-semibold mb-0.5">Explanation:</p>
+                  <p className="text-slate-300">
+                    Liskov Substitution Principle (LSP) requires that objects of a superclass can be replaced with objects of a subclass without affecting the correctness of the program.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -373,13 +601,23 @@ export const HomePage: React.FC = () => {
                   </p>
                 </div>
 
-                <button
-                  onClick={() => handleRoleStart(role.id)}
-                  className="w-full flex items-center justify-center space-x-2 py-2.5 px-4 rounded-xl bg-indigo-600/20 hover:bg-indigo-600 text-indigo-300 hover:text-white border border-indigo-500/30 hover:border-transparent text-xs font-semibold transition-all group-hover:shadow-lg group-hover:shadow-indigo-600/20"
-                >
-                  <span>Start Interview</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </button>
+                <div className="space-y-2 pt-2">
+                  <Link
+                    to={`/questions?role=${role.slug}`}
+                    className="w-full flex items-center justify-center space-x-1.5 py-2 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white text-xs font-semibold border border-slate-700/80 transition-all cursor-pointer"
+                  >
+                    <BookOpen className="w-3.5 h-3.5 text-indigo-400" />
+                    <span>View Interview Q&A</span>
+                  </Link>
+
+                  <button
+                    onClick={() => handleRoleStart(role.id)}
+                    className="w-full flex items-center justify-center space-x-1.5 py-2 px-3 rounded-xl bg-indigo-600/20 hover:bg-indigo-600 text-indigo-300 hover:text-white border border-indigo-500/30 hover:border-transparent text-xs font-semibold transition-all group-hover:shadow-lg group-hover:shadow-indigo-600/20 cursor-pointer"
+                  >
+                    <PlayCircle className="w-3.5 h-3.5" />
+                    <span>Take Mock Interview</span>
+                  </button>
+                </div>
               </div>
             ))}
           </div>

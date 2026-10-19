@@ -13,6 +13,7 @@ import {
   Sparkles,
   ChevronRight,
   ArrowLeft,
+  ListChecks,
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
@@ -32,7 +33,8 @@ export const AdminLayout: React.FC = () => {
 
   const navItems = [
     { label: 'Admin Dashboard', path: '/admin', icon: LayoutDashboard },
-    { label: 'Question Bank', path: '/admin/questions', icon: HelpCircle },
+    { label: 'MCQ Question Bank', path: '/admin/mcqs', icon: ListChecks },
+    { label: 'Interview Questions', path: '/admin/questions', icon: HelpCircle },
     { label: 'Supported Roles', path: '/admin/roles', icon: Briefcase },
     { label: 'Platform Users', path: '/admin/users', icon: Users },
     { label: 'All Interview Sessions', path: '/admin/interviews', icon: History },

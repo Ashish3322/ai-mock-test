@@ -1,0 +1,10 @@
+{
+  "name": "ai-interview-prep-workspace",
+  "version": "1.0.0",
+  "description": "AI Interview Prep full-stack platform",
+  "scripts": {
+    "start": "powershell -ExecutionPolicy Bypass -File .\\run.ps1",
+    "dev": "powershell -ExecutionPolicy Bypass -File .\\run.ps1",
+    "stop": ".\\stop-all.bat"
+  }
+}

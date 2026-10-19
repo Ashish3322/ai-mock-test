@@ -9,6 +9,7 @@ import {
   Shield,
   ArrowRight,
   Plus,
+  ListChecks,
 } from 'lucide-react';
 import { adminApi } from '../../services/api';
 import { AdminStats } from '../../types';
@@ -111,7 +112,26 @@ export const AdminDashboardPage: React.FC = () => {
       </div>
 
       {/* Quick Navigation Panels */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <Link
+          to="/admin/mcqs"
+          className="p-6 rounded-3xl bg-slate-900/40 border border-slate-800 hover:border-emerald-500/40 transition-all space-y-3 group"
+        >
+          <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+            <ListChecks className="w-5 h-5" />
+          </div>
+          <h3 className="text-base font-bold text-white group-hover:text-emerald-300 transition-colors">
+            MCQ Question Bank
+          </h3>
+          <p className="text-xs text-slate-400 leading-relaxed">
+            Create, view, and manage multiple-choice placement questions across 8 technical tracks.
+          </p>
+          <span className="text-xs font-semibold text-emerald-400 flex items-center space-x-1 pt-2">
+            <span>Manage MCQs</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </span>
+        </Link>
+
         <Link
           to="/admin/questions"
           className="p-6 rounded-3xl bg-slate-900/40 border border-slate-800 hover:border-indigo-500/40 transition-all space-y-3 group"
@@ -120,10 +140,10 @@ export const AdminDashboardPage: React.FC = () => {
             <HelpCircle className="w-5 h-5" />
           </div>
           <h3 className="text-base font-bold text-white group-hover:text-indigo-300 transition-colors">
-            Manage Question Bank
+            Manage Interview Questions
           </h3>
           <p className="text-xs text-slate-400 leading-relaxed">
-            Create, modify, toggle active status, and calibrate expected keywords for technical and HR questions.
+            Create, modify, and calibrate model answers for technical mock interview questions.
           </p>
           <span className="text-xs font-semibold text-indigo-400 flex items-center space-x-1 pt-2">
             <span>Open Questions</span>

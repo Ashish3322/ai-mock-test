@@ -97,3 +97,23 @@ export interface AdminStats {
   totalQuestions: number;
   averageScore: number;
 }
+
+export interface McqQuestion {
+  id: number;
+  track: string;
+  category: string;
+  difficulty: 'Easy' | 'Medium' | 'Hard';
+  question: string;
+  codeSnippet?: string;
+  options: string[];
+  correctAnswerIndex: number;
+  explanation: string;
+}
+
+export interface McqTrackInfo {
+  id: string;
+  name: string;
+  icon: string;
+  description: string;
+  questionCount: number;
+}

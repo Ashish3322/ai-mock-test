@@ -2,6 +2,7 @@ package com.aiinterview.prep.service;
 
 import com.aiinterview.prep.dto.*;
 import com.aiinterview.prep.entity.User;
+import java.util.Optional;
 import com.aiinterview.prep.exception.BadRequestException;
 import com.aiinterview.prep.exception.ResourceNotFoundException;
 import com.aiinterview.prep.repository.UserRepository;
@@ -60,17 +61,48 @@ public class AuthService {
     }
 
     public AuthResponse login(AuthRequest request) {
+        String input = request.getEmail() != null ? request.getEmail().trim().toLowerCase() : "";
+        User targetUser = resolveUser(input);
+        String authEmail = targetUser != null ? targetUser.getEmail() : input;
+
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.getEmail().toLowerCase().trim(), request.getPassword())
+                new UsernamePasswordAuthenticationToken(authEmail, request.getPassword())
         );
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        User user = userRepository.findByEmail(request.getEmail().toLowerCase().trim())
+        User user = targetUser != null ? targetUser : userRepository.findByEmail(authEmail)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
         String token = tokenProvider.generateToken(authentication);
         return new AuthResponse(token, user.getId(), user.getName(), user.getEmail(), user.getRole(), user.getTargetRole());
+    }
+
+    private User resolveUser(String input) {
+        if (input == null || input.isBlank()) return null;
+        Optional<User> direct = userRepository.findByEmail(input);
+        if (direct.isPresent()) return direct.get();
+
+        if (input.equals("admin") || input.startsWith("admin@")) {
+            return userRepository.findByEmail("admin@aiinterview.com")
+                    .or(() -> userRepository.findByEmail("admin@example.com"))
+                    .or(() -> userRepository.findAll().stream().filter(u -> "ROLE_ADMIN".equalsIgnoreCase(u.getRole())).findFirst())
+                    .orElse(null);
+        }
+
+        if (input.equals("student") || input.startsWith("student@")) {
+            return userRepository.findByEmail("student@aiinterview.com")
+                    .or(() -> userRepository.findByEmail("student@example.com"))
+                    .orElse(null);
+        }
+
+        return userRepository.findAll().stream()
+                .filter(u -> u.getEmail() != null && (
+                        u.getEmail().equalsIgnoreCase(input) ||
+                        u.getEmail().toLowerCase().startsWith(input + "@")
+                ))
+                .findFirst()
+                .orElse(null);
     }
 
     public User getAuthenticatedUser() {

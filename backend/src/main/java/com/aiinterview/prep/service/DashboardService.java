@@ -60,10 +60,10 @@ public class DashboardService {
 
         Map<String, Double> skills = new HashMap<>();
         if (!completed.isEmpty()) {
-            double correctness = completed.stream().mapToDouble(InterviewSession::getCorrectnessAvg).average().orElse(7.5) * 10.0;
-            double relevance = completed.stream().mapToDouble(InterviewSession::getRelevanceAvg).average().orElse(7.8) * 10.0;
-            double completeness = completed.stream().mapToDouble(InterviewSession::getCompletenessAvg).average().orElse(7.0) * 10.0;
-            double clarity = completed.stream().mapToDouble(InterviewSession::getClarityAvg).average().orElse(8.0) * 10.0;
+            double correctness = completed.stream().mapToDouble(InterviewSession::getCorrectnessAvg).average().orElse(0.0) * 10.0;
+            double relevance = completed.stream().mapToDouble(InterviewSession::getRelevanceAvg).average().orElse(0.0) * 10.0;
+            double completeness = completed.stream().mapToDouble(InterviewSession::getCompletenessAvg).average().orElse(0.0) * 10.0;
+            double clarity = completed.stream().mapToDouble(InterviewSession::getClarityAvg).average().orElse(0.0) * 10.0;
 
             skills.put("Technical Skills", Math.round(correctness * 10.0) / 10.0);
             skills.put("Correctness", Math.round(correctness * 10.0) / 10.0);
@@ -71,15 +71,15 @@ public class DashboardService {
             skills.put("Completeness", Math.round(completeness * 10.0) / 10.0);
             skills.put("Communication", Math.round(clarity * 10.0) / 10.0);
         } else {
-            skills.put("Technical Skills", 75.0);
-            skills.put("Correctness", 72.0);
-            skills.put("Relevance", 80.0);
-            skills.put("Completeness", 70.0);
-            skills.put("Communication", 78.0);
+            skills.put("Technical Skills", 0.0);
+            skills.put("Correctness", 0.0);
+            skills.put("Relevance", 0.0);
+            skills.put("Completeness", 0.0);
+            skills.put("Communication", 0.0);
         }
         stats.setSkillsBreakdown(skills);
 
-        // Strengths & areas to improve
+        // Strengths & areas to improve (dynamically collected from past candidate feedback)
         Set<String> strengths = new LinkedHashSet<>();
         Set<String> areas = new LinkedHashSet<>();
 
@@ -91,14 +91,10 @@ public class DashboardService {
         }
 
         if (strengths.isEmpty()) {
-            strengths.add("Solid understanding of object-oriented principles");
-            strengths.add("Structured explanation style");
-            strengths.add("Effective grasp of core syntax and semantics");
+            strengths.add("Complete your first interview session to unlock your verified strengths.");
         }
         if (areas.isEmpty()) {
-            areas.add("Elaborate on real-world system architecture tradeoffs");
-            areas.add("Incorporate edge case handling in algorithmic answers");
-            areas.add("Provide concrete code syntax snippets where applicable");
+            areas.add("Complete a practice session to receive targeted focal improvement areas.");
         }
 
         stats.setStrengths(new ArrayList<>(strengths).stream().limit(5).collect(Collectors.toList()));

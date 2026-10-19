@@ -71,7 +71,11 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   const login = async (credentials: { email: string; password: string }) => {
-    const res = await authApi.login(credentials);
+    const cleanCredentials = {
+      email: credentials.email.trim().toLowerCase(),
+      password: credentials.password.trim(),
+    };
+    const res = await authApi.login(cleanCredentials);
     return handleAuthSuccess(res);
   };
 
@@ -82,7 +86,14 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     confirmPassword: string;
     targetRole?: string;
   }) => {
-    const res = await authApi.register(userData);
+    const cleanUserData = {
+      ...userData,
+      name: userData.name.trim(),
+      email: userData.email.trim().toLowerCase(),
+      password: userData.password.trim(),
+      confirmPassword: userData.confirmPassword.trim(),
+    };
+    const res = await authApi.register(cleanUserData);
     return handleAuthSuccess(res);
   };
 
