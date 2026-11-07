@@ -9,13 +9,15 @@ import java.util.Map;
 @RestController
 public class HomeController {
 
-    @GetMapping("/")
-    public ResponseEntity<Map<String, Object>> root() {
+    @GetMapping("/api")
+    public ResponseEntity<Map<String, Object>> apiRoot() {
         return ResponseEntity.ok(Map.of(
                 "status", "UP",
                 "message", "AI Interview Prep Backend REST API is running successfully!",
-                "frontendUrl", "http://localhost:5173",
-                "apiRoles", "/api/roles"
+                "health", "/api/health",
+                "apiRoles", "/api/roles",
+                "apiQuestions", "/api/questions",
+                "apiMcqs", "/api/mcqs"
         ));
     }
 

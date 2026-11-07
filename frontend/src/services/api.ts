@@ -11,7 +11,18 @@ import {
   McqTrackInfo,
 } from '../types';
 
-const API_BASE_URL = '/api';
+const getBaseUrl = (): string => {
+  const envUrl = (import.meta.env.VITE_API_URL as string | undefined)?.trim();
+  if (!envUrl) {
+    return '/api';
+  }
+  const formatted = envUrl.startsWith('http://') || envUrl.startsWith('https://')
+    ? envUrl
+    : `https://${envUrl}`;
+  return `${formatted.replace(/\/+$/, '')}/api`;
+};
+
+const API_BASE_URL = getBaseUrl();
 
 const api = axios.create({
   baseURL: API_BASE_URL,

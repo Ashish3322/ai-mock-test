@@ -133,6 +133,15 @@ public class DataInitializer implements CommandLineRunner {
                 "Easy"
         ));
 
+        // 9. Flutter Developer
+        Role flutterDev = roleRepository.save(new Role(
+                "Flutter Developer",
+                "flutter-developer",
+                "Cross-platform mobile apps, Flutter framework, Dart isolates, Widget architecture, Riverpod/Bloc & native platform channels.",
+                "smartphone",
+                "Medium"
+        ));
+
         // Questions for Java Developer
         saveQ(javaDev, "Technical", "Explain the difference between HashMap and Hashtable in Java.", "Medium",
                 "thread safety, synchronized, null keys, performance, fail-fast iterator",
@@ -248,6 +257,27 @@ public class DataInitializer implements CommandLineRunner {
         saveQ(hrRole, "HR", "Why do you want to join our organization and where do you see yourself in 3 years?", "Easy",
                 "company alignment, growth mindset, technical mastery, mentorship, value creation",
                 "Connect your passion for the company's domain and engineering culture to your personal milestones: mastering core tech, mentoring peers, and driving impactful customer solutions.");
+
+        // Questions for Flutter Developer
+        saveQ(flutterDev, "Technical", "Explain the relationship between the Widget Tree, Element Tree, and RenderObject Tree in Flutter.", "Hard",
+                "Widget immutability, Element lifecycle, RenderObject layout and paint, reconciliation, build efficiency",
+                "In Flutter, rendering is achieved through three distinct, coordinated trees:\n\n1. Widget Tree: Widgets are immutable configurations or blueprints. Because creating widgets is extremely lightweight, Flutter rebuilds parts of this tree frequently on state change.\n\n2. Element Tree: Elements represent the runtime instantiation of widgets and manage lifecycle state. When a widget rebuilds, Flutter compares the old and new widget types and keys using canUpdate(). If identical, it updates the existing element rather than recreating it, avoiding expensive overhead.\n\n3. RenderObject Tree: RenderObjects handle the actual layout sizing (box constraints, performLayout) and painting (Canvas, Paint) on screen. They are persistent and expensive to create, so the Element tree recycles RenderObjects whenever possible. This three-tree separation allows Flutter to achieve smooth 60-120 FPS UI updates.");
+
+        saveQ(flutterDev, "Technical", "What is the difference between StatefulWidget, StatelessWidget, and InheritedWidget in Flutter? When would you use InheritedWidget?", "Medium",
+                "Stateless vs Stateful, State object lifecycle, InheritedWidget data propagation, of(context) lookup, O(1) context dependency",
+                "StatelessWidget is immutable and does not hold mutable state over time; its build() method depends solely on constructor arguments.\n\nStatefulWidget creates a companion State object that survives widget rebuilds, allowing mutable values to trigger UI updates via setState().\n\nInheritedWidget is a specialized base widget that allows data to efficiently propagate down the widget tree without manual prop drilling. Descendant widgets register dependencies by subscribing to it via BuildContext.dependOnInheritedWidgetOfExactType(), enabling O(1) ancestor lookups and notifying only dependent descendants when the data updates. Popular state libraries like Provider and Riverpod build on this concept.");
+
+        saveQ(flutterDev, "Architecture", "How do Dart isolates work, and how does Flutter achieve multithreading without shared memory?", "Hard",
+                "single-threaded event loop, isolates, microtask queue, ReceivePort, SendPort, compute() function, background tasks",
+                "Dart code runs in a single-threaded execution context backed by an Event Loop with two queues: the Microtask Queue and the Event Queue.\n\nTo perform heavy CPU-bound computation (such as large JSON parsing or image filtering) without stuttering the UI thread, Dart uses Isolates. Unlike traditional OS threads, Isolates do not share memory heap with each other, completely preventing race conditions and deadlocks. Communication between Isolates occurs purely via asynchronous message passing through SendPort and ReceivePort. Flutter provides the compute() helper function to easily offload intensive tasks to a worker isolate and return the result.");
+
+        saveQ(flutterDev, "Coding", "How does Flutter communicate with native Android (Kotlin/Java) and iOS (Swift/Objective-C) platforms?", "Medium",
+                "MethodChannel, EventChannel, BasicMessageChannel, binary messenger, asynchronous platform calls",
+                "Flutter bridges to native platform APIs using Platform Channels:\n\n1. MethodChannel: Designed for asynchronous method invocation (calling a native method with arguments and awaiting a return value, or vice-versa). Messages are serialized into binary buffers using standard message codecs.\n\n2. EventChannel: Designed for streaming continuous data from native code to Flutter (e.g. sensor readings, GPS location updates, battery percentage changes).\n\n3. BasicMessageChannel: Used for custom semi-structured or continuous message exchange with custom codecs.\n\nCalls through MethodChannels are non-blocking, ensuring the Flutter UI continues rendering smoothly while waiting for native platform responses.");
+
+        saveQ(flutterDev, "Optimization", "What are best practices for optimizing rendering performance and eliminating frame drops (jank) in a Flutter application?", "Medium",
+                "const constructors, RepaintBoundary, ListView.builder, avoiding unnecessary rebuilds, DevTools performance profiler",
+                "Key practices for eliminating frame drops in Flutter include:\n\n1. Use const constructors aggressively: Marks widgets as immutable singletons, allowing Flutter to short-circuit rebuilds.\n2. Use ListView.builder() or CustomScrollView instead of ListView(children: ...): Lazily builds only items currently visible on screen.\n3. Isolate state changes with small consumer widgets or ValueListenableBuilder: Avoid calling setState() high in the tree.\n4. Wrap complex or animated widgets in RepaintBoundary: Prevents expensive re-painting of unaffected parent or child subtrees.\n5. Offload CPU-heavy computation to worker isolates via compute().\n6. Avoid heavy operations or I/O inside build() methods.");
     }
 
     private void saveQ(Role role, String category, String text, String difficulty, String expected, String answer) {
