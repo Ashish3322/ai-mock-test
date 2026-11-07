@@ -47,4 +47,4 @@ services:
         fromService:
           type: web
           name: ai-interview-backend
-          property: host
+          envVarKey: RENDER_EXTERNAL_URL
