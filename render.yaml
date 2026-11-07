@@ -32,11 +32,12 @@ services:
   # ====================================================
   # Frontend Static Site (React 19 + Vite + Tailwind CSS)
   # ====================================================
-  - type: static
+  - type: web
     name: ai-interview-frontend
+    runtime: static
     rootDir: frontend
     buildCommand: npm install && npm run build
-    staticPublishPath: ./dist
+    staticPublishPath: dist
     routes:
       - type: rewrite
         source: /*
