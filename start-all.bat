@@ -10,7 +10,7 @@ set MARIADB_EXE="C:\Program Files\MariaDB 12.2\bin\mysqld.exe"
 set MVN_CMD="C:\Program Files\JetBrains\IntelliJ IDEA 2025.2\plugins\maven\lib\maven3\bin\mvn.cmd"
 
 echo [1/3] Starting Database (MariaDB on port 3307)...
-start "MariaDB (Port 3307)" %MARIADB_EXE% --datadir="%SCRIPT_DIR%mariadb-data" --port=3307 --bind-address=127.0.0.1
+start "MariaDB (Port 3307)" %MARIADB_EXE% --defaults-file="%SCRIPT_DIR%mariadb-data\my.ini" --console
 
 echo Waiting 3 seconds for database to initialize...
 timeout /t 3 /nobreak > nul

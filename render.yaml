@@ -28,6 +28,8 @@ services:
         value: mock
       - key: AI_API_KEY
         sync: false
+      - key: HIBERNATE_DIALECT
+        value: org.hibernate.dialect.PostgreSQLDialect
 
   # ====================================================
   # Frontend Static Site (React 19 + Vite + Tailwind CSS)

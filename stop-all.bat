@@ -12,7 +12,8 @@ echo Stopping Spring Boot (java on 8080)...
 for /f "tokens=5" %%a in ('netstat -aon ^| findstr :8080 ^| findstr LISTENING') do taskkill /F /PID %%a 2>nul
 
 echo Stopping MariaDB (mysqld on 3307)...
-for /f "tokens=5" %%a in ('netstat -aon ^| findstr :3307 ^| findstr LISTENING') do taskkill /F /PID %%a 2>nul
+for /f "tokens=5" %%a in ('netstat -aon ^| findstr :3307') do taskkill /F /PID %%a 2>nul
+taskkill /F /FI "WINDOWTITLE eq MariaDB (Port 3307)*" 2>nul
 
 echo.
 echo All services have been stopped.
